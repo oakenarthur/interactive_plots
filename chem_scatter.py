@@ -84,7 +84,7 @@ def display_selected_data(selectedData):
         active_list = list(df.is_active)
         mol_list = [Chem.MolFromSmiles(x) for x in smiles_list]
         name_list = [x + " " + str(y) for (x, y) in zip(name_list, active_list)]
-        img = MolsToGridImage(mol_list[0:max_structs], molsPerRow=structs_per_row, legends=name_list)
+        img = MolsToGridImage(mol_list[0:max_structs],returnPNG=False, molsPerRow=structs_per_row, legends=name_list)
         buffered = BytesIO()
         img.save(buffered, format="JPEG")
         encoded_image = base64.b64encode(buffered.getvalue())
@@ -97,6 +97,6 @@ if __name__ == '__main__':
     import socket
     hostname = socket.gethostname()
     IPAddr = socket.gethostbyname(hostname)    
-    app.run_server(debug=True,host=IPAddr)
+    app.run_server(debug=False,host=IPAddr)
     
     
